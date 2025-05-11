@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh57cx3if35p"]
+
+[ext_resource type="PackedScene" uid="uid://5y240dbxleit" path="res://Assets/PlayerObject.fbx" id="1_p6a57"]
+[ext_resource type="Script" path="res://player_body.gd" id="1_wklvi"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8gj20"]
+radius = 0.45
+height = 1.45
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.765171, 0)
+script = ExtResource("1_wklvi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.029977, 0, 0)
+shape = SubResource("CapsuleShape3D_8gj20")
+
+[node name="PlayerObject" parent="CollisionShape3D" instance=ExtResource("1_p6a57")]
+process_mode = 3
+transform = Transform3D(0.401, 0, 0, 0, 0.75, 0, 0, 0, 0.401, 2.30055e-05, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.188804, 0.982015, 0, -0.982015, 0.188804, 0.156191, 1.30992, 0.457309)

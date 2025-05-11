@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://ow8ywhyiguwh"]
+
+[ext_resource type="PackedScene" uid="uid://bh57cx3if35p" path="res://Player_Body.tscn" id="1_0y6fg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q1ety"]
+size = Vector3(25, 0.2, 25)
+
+[sub_resource type="Environment" id="Environment_26ru0"]
+ambient_light_color = Color(0.996807, 0.645391, 0.427077, 1)
+ambient_light_energy = 2.18
+reflected_light_source = 2
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ruqla"]
+
+[sub_resource type="Compositor" id="Compositor_mf4ms"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_q1ety")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_0y6fg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10697, 1.12269, 0.380722)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.750596, 0.660762, 0, -0.660762, 0.750596, 0, 2.39238, 1.84144)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_26ru0")
+camera_attributes = SubResource("CameraAttributesPractical_ruqla")
+compositor = SubResource("Compositor_mf4ms")
