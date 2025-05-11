@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://djt1vwtyjlmce"]
+
+[ext_resource type="Script" path="res://control.gd" id="1_i41eg"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rx4ul"]
+blend_mode = 3
+
+[node name="GUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i41eg")
+
+[node name="coin_and_fps" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 939.0
+offset_right = 1153.0
+offset_bottom = 69.0
+
+[node name="Label2" type="Label" parent="coin_and_fps"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 32.0
+offset_right = 213.0
+offset_bottom = 69.0
+
+[node name="Label" type="Label" parent="coin_and_fps"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 214.0
+offset_bottom = 34.0
+
+[node name="aim" type="Panel" parent="."]
+material = SubResource("CanvasItemMaterial_rx4ul")
+layout_mode = 0
+offset_left = 572.0
+offset_top = 324.0
+offset_right = 582.0
+offset_bottom = 334.0

@@ -1,14 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgga1e7qh8exk"]
+[gd_scene load_steps=9 format=3 uid="uid://cgga1e7qh8exk"]
 
-[ext_resource type="PackedScene" uid="uid://c0tijd7eu7fej" path="res://untitled.fbx" id="1_fsymb"]
+[ext_resource type="PackedScene" uid="uid://ce0ifdrmxjyq6" path="res://SA_coin_GG.fbx" id="1_cn8sf"]
+[ext_resource type="Script" path="res://moneta.gd" id="1_ore4k"]
+[ext_resource type="Script" path="res://area_3d.gd" id="1_vlkvy"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cauwd"]
-radius = 0.226414
+radius = 0.201037
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ahoot"]
-radius = 0.187878
+[sub_resource type="SphereShape3D" id="SphereShape3D_ij3rt"]
+radius = 0.185558
 
-[sub_resource type="Animation" id="Animation_5kpkp"]
+[sub_resource type="Animation" id="Animation_38hho"]
 resource_name = "idle"
 length = 4.0
 loop_mode = 1
@@ -19,13 +21,25 @@ tracks/0/path = NodePath("CollisionShape3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2, 3, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0.1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_thv5w"]
+[sub_resource type="Animation" id="Animation_ijfey"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -39,30 +53,43 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a3jsg"]
-_data = {
-"RESET": SubResource("Animation_thv5w"),
-"idle": SubResource("Animation_5kpkp")
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
 }
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aovkm"]
+_data = {
+"RESET": SubResource("Animation_ijfey"),
+"idle": SubResource("Animation_38hho")
+}
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="coin" type="StaticBody3D"]
+script = ExtResource("1_ore4k")
 
-[node name="Area3D" type="Area3D" parent="StaticBody3D"]
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("1_vlkvy")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_cauwd")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("SphereShape3D_ahoot")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ij3rt")
 
-[node name="untitled" parent="StaticBody3D/CollisionShape3D" instance=ExtResource("1_fsymb")]
-transform = Transform3D(0.187758, 0, 0, 0, 0.187758, 0, 0, 0, 0.0384578, 0, 0, 0)
+[node name="SA_coin_GG" parent="CollisionShape3D" instance=ExtResource("1_cn8sf")]
+transform = Transform3D(0.344473, 0, 0, 0, 0.344473, 0, 0, 0, 0.344473, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="StaticBody3D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_a3jsg")
+"": SubResource("AnimationLibrary_aovkm")
 }
-autoplay = "idle"
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

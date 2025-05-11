@@ -1,4 +1,8 @@
+Panel
+Label
+DirectionalLight3D
 AnimationPlayer
+Node
 CollisionShape3D
 Area3D
 StaticBody3D
